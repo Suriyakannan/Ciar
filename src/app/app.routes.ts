@@ -1,9 +1,7 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
-import { ProductFormComponent } from './product-form/product-form.component';
 
 export const routes: Routes = [
-    { path: 'products', component: ProductListComponent },
-    { path: 'form', component: ProductFormComponent },
-    { path: '',   redirectTo: '/products', pathMatch: 'full' }
+  { path: '', component: ProductListComponent }, // Default route
+  { path: 'add-product', loadComponent: () => import('./add-product/add-product.component').then(c => c.AddProductComponent) } // Lazy-loaded route
 ];

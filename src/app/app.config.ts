@@ -1,17 +1,9 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, Routes } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
-// import { routes } from './app.routes';
+import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
 
-const routes: Routes = [
-  {
-    path: 'products',
-    loadComponent: () => import('./product-list/product-list.component.js').then(mod => mod.ProductListComponent)
-  }
-];
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),  provideRouter(routes),
-    provideHttpClient(withFetch())]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration()]
 };

@@ -1,39 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../product';
-import { ProductService } from '../product.service';
 import { CommonModule } from '@angular/common';
-import { ProductFormComponent } from '../product-form/product-form.component';
-import { FormsModule } from '@angular/forms';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule,ProductFormComponent,FormsModule],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  imports: [CommonModule],
+  providers: [ProductService],
+  template: `
+    <div class="product-list">
+      <div *ngFor="let product of products" class="product-item">
+        <img [src]="product.image" alt="{{ product.name }}" width="100">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
+  `,
+  styles: []
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = []; 
+  products: any[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
-
-    this.productService.getProducts().subscribe(
-      (data) => {
-        this.products = data;
-      },
-      (error) => {
-        console.error('Error fetching products:', error);
-      }
-    );
- 
-  //  this.products = [
-  //     { id: '1', name: 'Product A', description: '...', price: 20, imageUrl: '...' },
-  //     { id: '2', name: 'Product B', description: '...', price: 30, imageUrl: '...' }
-  //  ];
-  }
-  onProductAdded(newProduct: Product): void {
-    this.products.push(newProduct); 
+  ngOnInit() {
+    this.productService.getProducts().subscribe(data => {
+      this.products = data;
+    });
   }
 }
