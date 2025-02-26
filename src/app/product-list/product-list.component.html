@@ -1,0 +1,14 @@
+
+<div class="product-list">
+    @for (product of products; track product.id) {
+      <div class="product-item">
+        <img [src]="product.imageUrl" [alt]="product.name">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <div class="price">${{ product.price }}</div>
+        <!-- @if (product.discount) {
+          <div class="discount">{{ product.discount }}</div>
+        } -->
+      </div>
+    }
+  </div>

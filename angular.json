@@ -73,6 +73,9 @@
             },
             "development": {
               "buildTarget": "ciar:build:development"
+            },
+            "options": {
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -103,5 +106,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "1e747756-6064-429f-8131-c9fbfeb7a660"
   }
 }
